@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --bg: #f6f9ff;
+  --ink: #0f172a;
+  --brand: #0b3b89;
+  --brand-soft: #235ab8;
+  --accent: #0ea5a4;
+  --card: rgba(255, 255, 255, 0.75);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 8% 20%, rgba(11, 59, 137, 0.2), transparent 38%),
+    radial-gradient(circle at 90% 10%, rgba(14, 165, 164, 0.22), transparent 40%),
+    linear-gradient(180deg, #f7fbff 0%, #eef4ff 100%);
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand-font {
+  font-family: 'Sora', sans-serif;
+}
+
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: var(--card);
+}
+
+.hero-image-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.4rem;
+}
+
+.hero-image-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 14, 43, 0.08), rgba(6, 21, 53, 0.58));
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.floating {
+  animation: float 5s ease-in-out infinite;
+}
