@@ -19,7 +19,7 @@ const clinic = {
   addressLine2: 'Sahibabad, Ghaziabad 201005',
   timings: '10:00 AM - 12:00 PM, Tuesday to Friday',
   appointmentNote: 'Saturday/Sunday by appointment, Monday closed',
-  phone: '9810590125',
+  phone: 'https://wa.me/919810590125',
   email: 'drvarshney123@gmail.com',
   mapLink: 'https://share.google/y0K5zmMxFC3L2zSBn',
   registration: 'MCI Reg No. 22918',
@@ -47,6 +47,7 @@ const MotionArticle = motion.article
 function App() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' })
   const [imageAvailable, setImageAvailable] = useState(true)
+  const [portraitAvailable, setPortraitAvailable] = useState(true)
 
   const isValid = useMemo(() => {
     return form.name.trim() && form.phone.trim() && form.message.trim()
@@ -85,10 +86,10 @@ function App() {
             <h1 className="mt-1 text-lg font-bold text-slate-900 sm:text-xl">{clinic.doctor}</h1>
           </div>
           <a
-            href={`tel:${clinic.phone}`}
+            href={clinic.phone}
             className="inline-flex items-center gap-2 rounded-full bg-[#0b3b89] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0a3276]"
           >
-            <Phone size={16} /> Call Now
+            <Phone size={16} /> WhatsApp Chat
           </a>
         </div>
       </MotionHeader>
@@ -158,13 +159,21 @@ function App() {
           className="grid gap-4 md:grid-cols-3"
         >
           <a
+            href={clinic.phone}
+           className="glass rounded-2xl border border-white/70 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <Phone className="text-[#0b3b89]" size={20} />
+            <h3 className="mt-2 font-bold text-slate-900">WhatsApp Chat</h3>
+            {/* <p className="text-sm text-slate-700">{clinic.phone}</p> */}
+          </a>
+          {/* <a
             href={`tel:${clinic.phone}`}
             className="glass rounded-2xl border border-white/70 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
           >
             <Phone className="text-[#0b3b89]" size={20} />
             <h3 className="mt-2 font-bold text-slate-900">Call Clinic</h3>
             <p className="text-sm text-slate-700">+91 {clinic.phone}</p>
-          </a>
+          </a> */}
           <a
             href={`mailto:${clinic.email}`}
             className="glass rounded-2xl border border-white/70 p-5 transition hover:-translate-y-0.5 hover:shadow-md"
@@ -191,14 +200,34 @@ function App() {
             className="glass rounded-3xl border border-white/70 p-6 shadow-[0_14px_40px_rgba(15,23,42,0.08)]"
           >
             <h3 className="text-2xl font-extrabold text-slate-900">Doctor Profile</h3>
-            <p className="mt-3 text-slate-700">
-              <span className="font-semibold">{clinic.doctor}</span> - {clinic.qualifications}
-            </p>
-            <p className="text-slate-700">{clinic.role}</p>
-            <p className="mt-1 text-slate-700">{clinic.registration}</p>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              Retired Professor, Teerthanker Mahaveer Medical College, Moradabad.
-            </p>
+            <div className="mt-4 grid gap-4 sm:grid-cols-[140px,1fr] sm:items-start">
+              <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
+                {portraitAvailable ? (
+                  <img
+                    src="/doctor-portrait.jpg"
+                    alt={`${clinic.doctor} portrait`}
+                    className="aspect-[3/4] w-full object-cover object-top"
+                    onError={() => setPortraitAvailable(false)}
+                  />
+                ) : (
+                  <div className="flex aspect-[3/4] items-center justify-center p-3 text-center">
+                    <p className="text-xs font-medium text-slate-600">
+                      Add portrait as <code>public/doctor-portrait.jpg</code>
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div>
+                <p className="text-slate-700">
+                  <span className="font-semibold">{clinic.doctor}</span> - {clinic.qualifications}
+                </p>
+                <p className="text-slate-700">{clinic.role}</p>
+                <p className="mt-1 text-slate-700">{clinic.registration}</p>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                  Retired Professor, Teerthanker Mahaveer Medical College, Moradabad.
+                </p>
+              </div>
+            </div>
           </MotionArticle>
 
           <MotionArticle
@@ -298,11 +327,11 @@ function App() {
                 Send Enquiry
               </button>
               <a
-                href={`tel:${clinic.phone}`}
-                className="rounded-full border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
-              >
-                Call Instead
-              </a>
+            href={clinic.phone}
+            className="inline-flex items-center gap-2 rounded-full bg-[#0b3b89] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0a3276]"
+          >
+            <Phone size={16} /> WhatsApp Chat
+          </a>
             </div>
           </form>
         </MotionSection>
